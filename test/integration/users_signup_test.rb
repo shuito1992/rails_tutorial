@@ -11,7 +11,21 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                          password_confirmation: "bar" } }
     end
     assert_template 'users/new'
+    #TODO 下記のテスト未実装
     assert_select 'div#error_explanation', nil
     assert_select 'div.alert-danger', nil
+  end
+
+  test "valid signup information" do
+    get signup_path
+    assert_difference 'User.count', 1 do
+      post users_path, params: { user: { name: "Example User",
+                                         email: "user@example.com",
+                                         password: "password",
+                                         password_confirmation: "password" } }
+    end
+    follow_redirect!
+    assert_template 'users/show'
+    assert_not flash.nil?
   end
 end
