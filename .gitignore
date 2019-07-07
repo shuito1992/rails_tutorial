@@ -35,3 +35,6 @@
 
 # ignore rbenv config
 .ruby-version
+
+# ignore upload dir
+/public/uploads
